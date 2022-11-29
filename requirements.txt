@@ -1,0 +1,12 @@
+# Common
+numpy>=1.16.6,<=1.23.1
+scipy~=1.5.4
+scikit-learn
+
+# Face-recognition
+opencv-python
+openvino-dev[ONNX,tensorflow2,pytorch]==2022.2.0
+
+# Voice verification
+moviepy
+
