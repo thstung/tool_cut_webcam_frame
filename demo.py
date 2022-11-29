@@ -205,7 +205,7 @@ def main():
             raise RuntimeError("Can't open video writer")
 
     # Start frame for Khanh_Minh: 1760, Thy: 15750
-    frame_start = 1760
+    frame_start = 1
     frame_num = frame_start
     class_config.video.set(cv2.CAP_PROP_POS_FRAMES, frame_start)
     while class_config.video.isOpened():
@@ -236,11 +236,11 @@ def main():
             
             #save image webcam
             if cv2.waitKey(1) & 0xFF == ord("1"):
-                save_webcam(0, class_config, frame, frame_num)
+                save_webcam(0, class_config, frame, args.output, frame_num)
             if cv2.waitKey(1) & 0xFF == ord("2"):
-                save_webcam(1, class_config, frame, frame_num)
+                save_webcam(1, class_config, frame, args.output, frame_num)
             if cv2.waitKey(1) & 0xFF == ord("3"):
-                save_webcam(2, class_config, frame, frame_num)
+                save_webcam(2, class_config, frame, args.output, frame_num)
             # Press Q on keyboard to  exit
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
@@ -248,7 +248,7 @@ def main():
 
         frame_num += 1
 
-def save_webcam(id, class_config, output_frame, frame_num):
+def save_webcam(id, class_config, output_frame, output, frame_num):
     wc_padding = WEBCAM_PADDING[class_config.type]
     wc_width = WEBCAM_WIDTH[class_config.type]
     wc_top = WEBCAM_TOP[class_config.type]
@@ -259,7 +259,7 @@ def save_webcam(id, class_config, output_frame, frame_num):
     wc_right = wc_left + wc_width
     web_frame = output_frame[wc_top:wc_bot, wc_left:wc_right]
     time = str(int(frame_num/class_config.fps)//60) + str(int(frame_num/class_config.fps)%60)
-    cv2.imwrite(f"output/{name[id] + time}.png", web_frame)
+    cv2.imwrite(f"{output}/{name[id] + time}.png", web_frame)
 
 def draw_detections(
     class_config: ClassConfig,
